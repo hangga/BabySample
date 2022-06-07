@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "id.web.hangga.samplebaby"
-        minSdk 19
+        minSdk 24
         targetSdk 31
         versionCode 1
         versionName "1.0"
