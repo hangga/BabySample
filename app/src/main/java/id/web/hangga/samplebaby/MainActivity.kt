@@ -8,14 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import io.github.hangga.babybus.BabyBus
 
 class MainActivity : AppCompatActivity() {
-    var babyBus: BabyBus? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        babyBus = BabyBus(this)
+        val babyBus = BabyBus(this)
         val txtData = findViewById<TextView?>(R.id.txtData)
         findViewById<View?>(R.id.btnPick).setOnClickListener {
-            babyBus!!.startActivityForResult(ModalActivity::class.java, { i, data ->
+            babyBus.startActivityForResult(ModalActivity::class.java) { i, data ->
                 if (i == RESULT_OK) {
                     val nama = data.getStringExtra("nama")
                     val alamat = data.getStringExtra("alamat")
@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() {
                     txtData.append("$alamat | ")
                     txtData.append(phone)
                 }
-            })
+            }
         }
         findViewById<View?>(R.id.btnStart).setOnClickListener {
             val intent = Intent(this@MainActivity, ModalActivity::class.java)
             intent.putExtra("call_type", "startIntent")
-            babyBus!!.startIntent(intent, { i, data ->
+            babyBus.startIntent(intent) { i, data ->
                 if (i == RESULT_OK) {
                     val nama = data.getStringExtra("nama")
                     val alamat = data.getStringExtra("alamat")
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                     txtData.append("$alamat | ")
                     txtData.append(phone)
                 }
-            })
+            }
         }
     }
 }
